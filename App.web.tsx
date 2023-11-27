@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Login from './src/screens/Login';
-import Home from './src/screens/home';
+import Home from './src/screens/Home';
 import Catalogo from './src/screens/Catalogo';
 
 

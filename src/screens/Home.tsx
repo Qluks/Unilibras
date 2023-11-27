@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 
 
 
-const Home = ({navigation}) => {
+const Home = () => {
   
 
   return (
