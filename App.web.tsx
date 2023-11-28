@@ -20,12 +20,12 @@ function HomeTabNavigator() {
     initialRouteName="Home2"
         screenOptions={{
           tabBarStyle:{
-            backgroundColor: '#15141F',
+            backgroundColor: '#f2af58',
             paddingBottom: 10,
           },
           headerTintColor: '#ffffff',
           headerStyle: {
-            backgroundColor: '#15141F',
+            backgroundColor: '#f2af58',
           },
         }}
     >
@@ -49,14 +49,14 @@ const App = () => {
     <Stack.Navigator>
 
       <Stack.Screen 
-        name="Login"
+        name="Unilibras"
         component={Login}
         options={{ headerShown: false }}
       />
 
 
         <Stack.Screen 
-          name="Entrar"
+          name="Home"
           component={HomeTabNavigator}
           options={{ headerShown: false }}
         />

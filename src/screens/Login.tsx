@@ -1,61 +1,67 @@
 import * as React from 'react';
-import { View, Text, StyleSheet, Image, Button} from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+
 import mao from '../assets/mao.png';
 import Home from './home';
 
-
-function Login({navigation}) {
-
-
+function Login({ navigation }) {
     return (
         <View style={styles.container}>
             <Image style={styles.image} source={mao} />
             <Text style={styles.textStyle1}>Bem-vindo!!</Text>
-            <Text style={styles.textStyle2}>Libras é a sigla da Língua Brasileira de Sinais, uma língua de modalidade gestual-visual onde é possível se comunicar através de gestos, expressões faciais e corporais.</Text>
-            <Button
-                onPress={() => navigation.navigate('Entrar')}
-                title="Começar"
-                buttonStyle={{
-                    backgroundColor: '#f2af58',
-                    borderRadius: 12,
-                }}      
-                containerStyle={{
-                    width: 300,
-                    height: 55,
-                    marginTop: 50,
-                    fontSize: 18,   
-                }}
-                titleStyle={{ color: 'white', fontSize:18, paddingVertical: 5}}
-            />
+            <Text style={styles.textStyle2}>
+                Libras é a sigla da Língua Brasileira de Sinais, uma língua de modalidade gestual-visual onde é possível se comunicar através de gestos, expressões faciais e corporais.
+            </Text>
+            <TouchableOpacity
+                onPress={() => navigation.navigate('Home')}
+                style={styles.button}
+            >
+                <Text style={styles.buttonText}>Começar</Text>
+            </TouchableOpacity>
         </View>
-      );
+    );
 }
 
 const styles = StyleSheet.create({
     container: {
-      backgroundColor: "#FFFFFF",
-      width: "100%",
-      height: "100%",
-      flexDirection: 'column',
-      textAlign: "center",
-      alignItems: "center"
+        flex: 1,
+        backgroundColor: "#FFFFFF",
+        alignItems: "center",
+        justifyContent: "flex-start",
+        paddingHorizontal: 20,
+        paddingTop: 50,
+    },
+    image: {
+        width: 250,
+        height: 250,
+        marginBottom: 20,
     },
     textStyle1: {
         color: "#000000",
-        marginTop: 30,
+        fontSize: 24,
         fontWeight: "bold",
+        marginBottom: 10,
     },
     textStyle2: {
+        marginTop: 30,
         color: "#000000",
-        marginLeft: 5,
-        marginTop: 20,
-        textAlign: "center"
+        fontSize: 16,
+        textAlign: "center",
+        marginBottom: 30,
     },
-    image: {
-        marginTop: 150,
-        width: 200,
-        height: 200,
-    }
+    button: {
+        marginTop: 50,
+        backgroundColor: '#f2af58',
+        borderRadius: 12,
+        width: '100%',
+        paddingVertical: 15,
+        alignItems: "center",
+    },
+    buttonText: {
+        color: 'white',
+        fontSize: 18,
+        fontWeight: "bold",
+    },
 });
 
 export default Login;
