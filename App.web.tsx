@@ -18,6 +18,7 @@ function HomeTabNavigator() {
         tabBarStyle: {
           backgroundColor: '#f2af58',
           paddingBottom: 10,
+          position: 'absolute'
         },
         headerTintColor: '#ffffff',
         headerStyle: {
