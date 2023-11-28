@@ -1,93 +1,67 @@
 import * as React from 'react';
-import { View, Text, Picker, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 
-function Home() {
-    const [nome, setNome] = React.useState('');
-    const [curso, setCurso] = React.useState('Administração');
-    const [periodo, setPeriodo] = React.useState('');
-    const [turno, setTurno] = React.useState('Manhã');
+import mao from '../assets/mao.png';
 
-    const handleSubmit = () => {
-        console.log('Nome:', nome);
-        console.log('Curso:', curso);
-        console.log('Período:', periodo);
-        console.log('Turno:', turno);
-    };
-
-    return (
-        <View style={styles.container}>
-            <Text style={styles.label}>Nome:</Text>
-            <TextInput
-                style={styles.input}
-                value={nome}
-                onChangeText={text => setNome(text)}
-            />
-
-            <Text style={styles.label}>Curso:</Text>
-            <Picker
-                selectedValue={curso}
-                style={styles.input}
-                onValueChange={(itemValue) => setCurso(itemValue)}
-            >
-                <Picker.Item label="Administração" value="Administração" />
-                <Picker.Item label="Arquitetura e Urbanismo" value="Arquitetura e Urbanismo" />
-                <Picker.Item label="Sistemas para Internet" value="Sistemas para Internet" />
-                
-            </Picker>
-
-            <Text style={styles.label}>Período:</Text>
-            <TextInput
-                style={styles.input}
-                value={periodo}
-                onChangeText={text => setPeriodo(text)}
-            />
-
-            <Text style={styles.label}>Turno:</Text>
-            <Picker
-                selectedValue={turno}
-                style={styles.input}
-                onValueChange={(itemValue) => setTurno(itemValue)}
-            >
-                <Picker.Item label="Manhã" value="Manhã" />
-                <Picker.Item label="Tarde" value="Tarde" />
-                <Picker.Item label="Noite" value="Noite" />
-            </Picker>
-
-            <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                <Text style={styles.buttonText}>Enviar</Text>
-            </TouchableOpacity>
-        </View>
-    );
+function Login({navigation}) {
+  return (
+    <View style={styles.container}>
+      <Image style={styles.image} source={mao} />
+      <Text style={styles.textStyle1}>Bem-vindo!!</Text>
+      <Text style={styles.textStyle2}>
+        Libras é a sigla da Língua Brasileira de Sinais, uma língua de
+        modalidade gestual-visual onde é possível se comunicar através de
+        gestos, expressões faciais e corporais.
+      </Text>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Formulario')}
+        style={styles.button}>
+        <Text style={styles.buttonText}>Começar</Text>
+      </TouchableOpacity>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 20,
-        backgroundColor: '#fff',
-    },
-    label: {
-        fontSize: 16,
-        marginBottom: 5,
-    },
-    input: {
-        borderWidth: 1,
-        borderColor: '#ccc',
-        borderRadius: 5,
-        padding: 10,
-        marginBottom: 20,
-    },
-    button: {
-        backgroundColor: '#f2af58',
-        padding: 15,
-        borderRadius: 8,
-        alignItems: 'center',
-    },
-    buttonText: {
-        color: '#fff',
-        fontSize: 18,
-        fontWeight: 'bold',
-    },
+  container: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+    paddingTop: 50,
+  },
+  image: {
+    width: 250,
+    height: 250,
+    marginBottom: 20,
+  },
+  textStyle1: {
+    color: '#000000',
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  textStyle2: {
+    marginTop: 30,
+    color: '#000000',
+    fontSize: 16,
+    textAlign: 'center',
+    marginBottom: 30,
+  },
+  button: {
+    marginTop: 50,
+    backgroundColor: '#f2af58',
+    borderRadius: 12,
+    width: '100%',
+    paddingVertical: 15,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
 });
 
-export default Home;
+export default Login;
