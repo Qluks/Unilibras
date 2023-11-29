@@ -1,10 +1,9 @@
 const path = require('path');
-
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const appDirectory = path.resolve(__dirname);
-const {presets} = require(`${appDirectory}/babel.config.js`);
+const { presets } = require(`${appDirectory}/babel.config.js`);
 
 const compileNodeModules = [
   // Add every react-native package that needs compiling
@@ -12,11 +11,11 @@ const compileNodeModules = [
 ].map((moduleName) => path.resolve(appDirectory, `node_modules/${moduleName}`));
 
 const babelLoaderConfiguration = {
-  test: /\.js$|tsx?$/,
+  test: /\.js$|jsx?$/, // Changed to support .jsx files
   // Add every directory that needs to be compiled by Babel during the build.
   include: [
     path.resolve(__dirname, 'index.web.js'), // Entry to your application
-    path.resolve(__dirname, 'App.web.tsx'), // Change this to your main App file
+    path.resolve(__dirname, 'App.web.jsx'), // Change this to your main App file with .jsx extension
     path.resolve(__dirname, 'src'),
     ...compileNodeModules,
   ],
@@ -59,7 +58,7 @@ module.exports = {
     filename: 'rnw_blogpost.bundle.js',
   },
   resolve: {
-    extensions: ['.web.tsx', '.web.ts', '.tsx', '.ts', '.web.js', '.js'],
+    extensions: ['.web.jsx', '.web.js', '.jsx', '.js'], // Removed .tsx and .ts
     alias: {
       'react-native$': 'react-native-web',
     },
