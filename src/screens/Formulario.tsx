@@ -66,7 +66,7 @@ function Home({navigation}) {
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('Home')}>
+        onPress={() => navigation.navigate('Chat')}>
         <Text style={styles.buttonText}>Enviar</Text>
       </TouchableOpacity>
     </View>

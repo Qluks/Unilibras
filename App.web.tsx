@@ -5,31 +5,12 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from './src/screens/Home';
 import Educacao from './src/screens/Educacao';
 import Formulario from './src/screens/Formulario';
-import Principal from './src/screens/Principal';
+import Chat from './src/screens/Chat';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function HomeTabNavigator() {
-  return (
-    <Tab.Navigator
-      initialRouteName="Home2"
-      screenOptions={{
-        tabBarStyle: {
-          backgroundColor: '#f2af58',
-          paddingBottom: 10,
-          position: 'absolute'
-        },
-        headerTintColor: '#ffffff',
-        headerStyle: {
-          backgroundColor: '#f2af58',
-        },
-      }}>
-      <Tab.Screen name="Chat" component={Principal} />
-      <Tab.Screen name="Educação" component={Educacao} />
-    </Tab.Navigator>
-  );
-}
+
 
 const App = () => {
   return (
@@ -41,17 +22,26 @@ const App = () => {
           options={{headerShown: false}}
         />
 
-        <Stack.Screen
-          name="Home"
-          component={HomeTabNavigator}
-          options={{headerShown: false}}
-        />
 
         <Stack.Screen
           name="Formulario"
           component={Formulario}
           options={{headerShown: false}}
         />
+
+        
+        <Stack.Screen
+          name="Chat"
+          component={Chat}
+          options={{headerShown: false}}
+        />
+
+        <Stack.Screen
+          name="Educacao"
+          component={Educacao}
+          options={{headerShown: false}}
+        />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

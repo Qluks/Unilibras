@@ -4,6 +4,9 @@ import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import mao from '../assets/mao.png';
 
 function Login({navigation}) {
+
+
+
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={mao} />
@@ -13,6 +16,9 @@ function Login({navigation}) {
         modalidade gestual-visual onde é possível se comunicar através de
         gestos, expressões faciais e corporais.
       </Text>
+      <TouchableOpacity onPress={() => navigation.navigate('Educacao')}>
+        <Text style={styles.text}>Não sabe se comunicar em libras? clique aqui e aprenda!</Text>
+      </TouchableOpacity>
       <TouchableOpacity
         onPress={() => navigation.navigate('Formulario')}
         style={styles.button}>
