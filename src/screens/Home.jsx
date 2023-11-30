@@ -5,8 +5,6 @@ import mao from '../assets/mao.png';
 
 function Login({navigation}) {
 
-
-
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={mao} />
@@ -67,6 +65,12 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  text: {
+    color: '#808080',
+    fontSize: 12,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 

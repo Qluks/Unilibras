@@ -1,15 +1,14 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from './src/screens/Home';
-import Educacao from './src/screens/Educacao';
 import Formulario from './src/screens/Formulario';
 import Chat from './src/screens/Chat';
+import Catalogo from './src/screens/Catalogo';
+import Lista from './src/screens/Lista';
+import Exemplos from './src/screens/Exemplos';
 
 const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
-
 
 const App = () => {
   return (
@@ -37,8 +36,44 @@ const App = () => {
 
         <Stack.Screen
           name="Educacao"
-          component={Educacao}
-          options={{headerShown: false}}
+          component={Catalogo}
+          options={{
+            headerTintColor: '#000000',
+            headerStyle: {
+              backgroundColor: '#f2af58',
+              textAlign: 'center',
+            },
+            headerShadowVisible: false,
+            headerTitleAlign: 'center'
+          }}
+        />
+
+        <Stack.Screen
+          name="Lista"
+          component={Lista}
+          options={{
+            headerTintColor: '#000000',
+            headerStyle: {
+              backgroundColor: '#f2af58',
+              textAlign: 'center',
+            },
+            headerShadowVisible: false,
+            headerTitleAlign: 'center'
+          }}
+        />
+
+        <Stack.Screen
+          name="Exemplos"
+          component={Exemplos}
+          options={{
+            headerTintColor: '#000000',
+            headerStyle: {
+              backgroundColor: '#f2af58',
+              textAlign: 'center',
+            },
+            headerShadowVisible: false,
+            headerTitleAlign: 'center'
+          }}
         />
 
       </Stack.Navigator>
