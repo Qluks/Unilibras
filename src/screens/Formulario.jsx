@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
     padding: 10,
+    height: '100%',
     backgroundColor: '#f2af58',
   },
   inputContainer: {
