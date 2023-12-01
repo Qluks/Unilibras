@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, FlatList, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
 import { firestore, auth } from '../firebase';
 
 const ChatScreen = () => {
@@ -49,7 +49,18 @@ const ChatScreen = () => {
           value={newMessage}
           onChangeText={text => setNewMessage(text)}
         />
-        <Button title="Send" onPress={sendMessage} />
+        <TouchableOpacity
+        style={{
+          height: 50,
+          width: 100,
+          borderRadius: 10,
+          backgroundColor: '#808080',
+          alignItems: 'center',
+          position: 'relative',
+        }}
+        onPress={sendMessage}>
+          <Text style={{ marginTop: 15, color: '#FFFFFF' }}>Enviar</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -60,18 +71,22 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
     padding: 10,
+    backgroundColor: '#f2af58',
   },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   input: {
+    width: '100px',
+    height: '50px',
     flex: 1,
     borderWidth: 1,
     borderColor: 'gray',
     borderRadius: 5,
     paddingHorizontal: 10,
     marginRight: 10,
+    backgroundColor: '#FFFFFF',
   },
   sentMessage: {
     alignSelf: 'flex-end',
