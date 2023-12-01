@@ -7,6 +7,7 @@ import Chat from './src/screens/Chat';
 import Catalogo from './src/screens/Catalogo';
 import Lista from './src/screens/Lista';
 import Exemplos from './src/screens/Exemplos';
+import Login from './src/screens/Login';
 
 const Stack = createStackNavigator();
 
@@ -20,6 +21,11 @@ const App = () => {
           options={{headerShown: false}}
         />
 
+      <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{headerShown: false}}
+        />  
 
         <Stack.Screen
           name="Formulario"

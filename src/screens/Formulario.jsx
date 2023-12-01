@@ -1,113 +1,92 @@
-import * as React from 'react';
-import {
-  View,
-  Text,
-  Picker,
-  TextInput,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, Button, FlatList, StyleSheet } from 'react-native';
+import { firestore, auth } from '../firebase';
 
-function Home({navigation}) {
-  const [nome, setNome] = React.useState('');
-  const [curso, setCurso] = React.useState('Administração');
-  const [periodo, setPeriodo] = React.useState('');
-  const [turno, setTurno] = React.useState('Manhã');
+const ChatScreen = () => {
+  const [messages, setMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState('');
 
-  const handleSubmit = () => {
-    console.log('Nome:', nome);
-    console.log('Curso:', curso);
-    console.log('Período:', periodo);
-    console.log('Turno:', turno);
+  useEffect(() => {
+    const unsubscribe = firestore.collection('chatMessages')
+      .orderBy('timestamp')
+      .onSnapshot(snapshot => {
+        const data = snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setMessages(data);
+      });
+
+    return () => unsubscribe();
+  }, []);
+
+  const sendMessage = async () => {
+    if (newMessage.trim() !== '') {
+      await firestore.collection('chatMessages').add({
+        text: newMessage,
+        timestamp: new Date(),
+        sender: auth.currentUser.uid
+      });
+      setNewMessage('');
+    }
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.textStyle1}>Formulário de Atendimento</Text>
-      <Text style={styles.label}>Nome:</Text>
-      <TextInput
-        style={styles.input}
-        value={nome}
-        onChangeText={text => setNome(text)}
+      <FlatList
+        data={messages}
+        keyExtractor={item => item.id}
+        renderItem={({ item }) => (
+          <View style={item.sender === auth.currentUser.uid ? styles.sentMessage : styles.receivedMessage}>
+            <Text>{item.text}</Text>
+          </View>
+        )}
       />
-
-      <Text style={styles.label}>Curso:</Text>
-      <Picker
-        selectedValue={curso}
-        style={styles.input}
-        onValueChange={itemValue => setCurso(itemValue)}>
-        <Picker.Item label="Administração" value="Administração" />
-        <Picker.Item
-          label="Arquitetura e Urbanismo"
-          value="Arquitetura e Urbanismo"
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Type a message..."
+          value={newMessage}
+          onChangeText={text => setNewMessage(text)}
         />
-        <Picker.Item
-          label="Sistemas para Internet"
-          value="Sistemas para Internet"
-        />
-      </Picker>
-
-      <Text style={styles.label}>Período:</Text>
-      <TextInput
-        style={styles.input}
-        value={periodo}
-        onChangeText={text => setPeriodo(text)}
-      />
-
-      <Text style={styles.label}>Turno:</Text>
-      <Picker
-        selectedValue={turno}
-        style={styles.input}
-        onValueChange={itemValue => setTurno(itemValue)}>
-        <Picker.Item label="Manhã" value="Manhã" />
-        <Picker.Item label="Tarde" value="Tarde" />
-        <Picker.Item label="Noite" value="Noite" />
-      </Picker>
-
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('Chat')}>
-        <Text style={styles.buttonText}>Enviar</Text>
-      </TouchableOpacity>
+        <Button title="Send" onPress={sendMessage} />
+      </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
     flex: 1,
-    padding: 20,
-    backgroundColor: '#fff',
-  },
-  label: {
-    fontSize: 16,
-    marginBottom: 5,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
+    justifyContent: 'space-between',
     padding: 10,
-    marginBottom: 20,
   },
-  button: {
-    backgroundColor: '#f2af58',
-    padding: 15,
-    borderRadius: 8,
+  inputContainer: {
+    flexDirection: 'row',
     alignItems: 'center',
   },
-  buttonText: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
+  input: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: 'gray',
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    marginRight: 10,
   },
-  textStyle1: {
-    color: '#000000',
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 10,
+  sentMessage: {
+    alignSelf: 'flex-end',
+    backgroundColor: '#DCF8C6',
+    padding: 10,
+    marginVertical: 5,
+    borderRadius: 5,
+  },
+  receivedMessage: {
+    alignSelf: 'flex-start',
+    backgroundColor: '#E5E5EA',
+    padding: 10,
+    marginVertical: 5,
+    borderRadius: 5,
   },
 });
 
-export default Home;
+export default ChatScreen;

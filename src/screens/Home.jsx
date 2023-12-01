@@ -18,7 +18,7 @@ function Login({navigation}) {
         <Text style={styles.text}>Não sabe se comunicar em libras? clique aqui e aprenda!</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => navigation.navigate('Formulario')}
+        onPress={() => navigation.navigate('Login')}
         style={styles.button}>
         <Text style={styles.buttonText}>Começar</Text>
       </TouchableOpacity>
